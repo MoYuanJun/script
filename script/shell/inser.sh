@@ -1,14 +1,17 @@
 # 福州数据：
-dbFile_mysql='/home/qianyin/Company/资料/fz_maintenance_test_data/maintenance.sql'
-dbDataUrl_mongo='/home/qianyin/Company/资料/fz_maintenance_test_data/maintenance'
+# dbFile_mysql='/home/qianyin/Company/资料/fz_maintenance_test_data/maintenance.sql'
+# dbDataUrl_mongo='/home/qianyin/Company/资料/fz_maintenance_test_data/maintenance'
 
 # 龙岩数据
-# dbFile_mysql='/home/qianyin/Company/资料/龙岩数据备份/mysql.sql'
-# dbDataUrl_mongo='/home/qianyin/Company/资料/龙岩数据备份/maintenance'
+dbFile_mysql='/home/qianyin/Company/资料/龙岩数据备份/mysql.sql'
+dbDataUrl_mongo='/home/qianyin/Company/资料/龙岩数据备份/maintenance'
 
 # 容器ID
-mysql='9df565960bcc'
-mongo='b038a425940f'
+mysql='78d029654fbe'
+mongo='21b4ea191588'
+
+# 启动容器
+# sudo docker run $mysql $mongo
 
 # mysql
 sudo docker cp $dbFile_mysql $mysql:/root/mysql.sql
