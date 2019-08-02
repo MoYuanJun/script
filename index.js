@@ -1,26 +1,58 @@
 #!/usr/bin/env node
-const program = require('commander');
-const version = require('./package.json').version;
+const shell = require('shelljs');
+const inquirer = require('inquirer');
+const handler = (answers) => {
+  console.log('--- 脚本开始　---');
+  const { folder, productName, productProject, customs } = answers || {};
+  if (!shell.which('git')) {
+    shell.echo('对不起，请先安装 git');
+    shell.exit(1);
+  }
+  if (shell.exec(`git clone git@172.20.52.100:sailing/PUBLIC-WebConsoleFront.git ${folder}`).code !== 0) {
+    shell.echo('git clone 失败');
+    shell.exit(1);
+  }
+  shell.cd(folder);
+  shell.rm('-rf', '.git/');
+  shell.rm('-rf', 'bin/');
+  shell.sed('-i', /%PRODUCT_NAME%/g, productName, 'public/index.html');
 
-program
-  .version(version)
-  .description('测试 cli 命令工具')
-  // program.add 将返回 undefined 或者 true， 
-  // 表示 hello-cli 在执行时是否使用了选项 -a 或 --add
-  .option('-a, --add', '是否添加文件')
-  // 通过 --no 获取相反值， program.remove 将返回 true 或者 false
-  // 执行 hello-cli --no-remove 则 program.remove 将返回  false
-  .option('--no-remove', '是否禁止移除')
-  // 下面多单词的情况下可通过 program.addFile 获取 cli 执行情况
-  .option('--add-file', '是否添加文件')
-  // 通过 <必填内容> 规定在使用 -p 选项情况下必须跟随参数，program.print 将获取到参数内容
-  .option('-p, --print <必填内容>', '指定打印输出')
-    // 通过 [必填内容] 规定在使用 -p 选项情况下可填内容，program.console 将获取到参数内容
-    .option('-c, --console <选填内容>', '指定 console 内容')
-  .parse(process.argv);  
+  if (shell.exec(`git clone ${productProject} src/productLine`).code !== 0) {
+    shell.echo('git clone 失败');
+    shell.exit(1);
+  }
+  shell.cp('-R', `customs/${customs}/defaultConfig.js`, 'src/conf/defaultConfig.js');
+  shell.rm('-rf', 'customs/');
+  console.log('--- 脚本结束　---');
+};
 
-console.log(program.add);
-console.log(program.remove);
-console.log(program.addFile);
-console.log(program.print);
-console.log(program.console);
+// 交互式数据获取
+const promptList = [
+  {
+    type: "input",
+    message: "项目名称",
+    name: "folder",
+  },
+  {
+    type: "input",
+    message: "系统名称",
+    name: "productName",
+  },
+  {
+    type: "input",
+    message: "产品线 git 远程仓库",
+    name: "productProject",
+  },
+  {
+    type: "input",
+    message: "定制化文件名",
+    name: "customs",
+  },
+  {
+    type: "list",
+    message: "项目选择",
+    name: "customs_",
+    choices: ['综合日志', '网络审计']
+  },
+];
+inquirer.prompt(promptList).then(handler)
