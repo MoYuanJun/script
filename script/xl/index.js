@@ -18,7 +18,7 @@ if (!shell.which('git')) {
 
 // 2. 克隆公共部分项目
 shell.echo(colors.green('\n1. 开始克隆远程分支到本地......'));
-if (shell.exec(`git clone -b dev-pub git@172.20.52.100:sailing/PUBLIC-WebConsoleFront.git ${folderName}`).code !== 0) {
+if (shell.exec(`git clone git@172.20.52.100:sailing/PUBLIC-WebConsoleFront.git ${folderName}`).code !== 0) {
   shell.echo(colors.red('克隆公共部分项目失败!'));
   shell.exit(1);
 }
@@ -47,7 +47,7 @@ inquirer.prompt([  {
   const { title, depository, customs, publickBranch } = productLine;
 
   // 4.1 切到公共部分指定分支
-  publickBranch && shell.exec(`git checkout ${publickBranch}`);
+  publickBranch && shell.exec(`git fetch && git checkout ${publickBranch}`);
 
   // 4.1 项目设置
   title && shell.sed('-i', /%PRODUCT_NAME%/g, title, 'public/index.html');
