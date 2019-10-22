@@ -1,0 +1,32 @@
+{
+  "code": 200,
+  "reason": "成功",
+  "data": {
+    "pnumSize": 20,
+    "current": 1,
+    "total": 3,
+    "objects": [
+      {
+        "id": "5b3683219cc847eb9d41",
+        "name": "演示数据一",
+        "num": 12,
+        "status": true,
+        "type": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "id": "5b3683219cc847eb9d42",
+        "name": "演示数据二",
+        "num": 12,
+        "status": true,
+        "type": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    ]
+  }
+}

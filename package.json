@@ -10,7 +10,8 @@
   "private": false,
   "bin": {
     "hello-cli": "index.js",
-    "xl-create-react-app": "./script/xl/index.js"
+    "xl-create-react-app": "./script/xl/index.js",
+    "template": "./script/template/index.js"
   },
   "repository": {
     "type": "git",
