@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from "react-redux";
-import { Breadcrumb, Button, Modal, message } from 'antd';
+import { Breadcrumb, Button, Modal, message, Row, Col } from 'antd';
 
 import { openModalAction } from "../../modules/modalModule";
 import { setPaginationAction } from "../../../modules/paginationModule";
+import LineTitle from "../../../components/lineTitle";
 
 import asyncManage from "./mock/asyncManage";
 
@@ -44,7 +45,8 @@ class OperationContainer extends React.Component {
 
     render (){
         return (
-            <div className="content-operation">
+            <div className="content-operation-wrapper">
+                <LineTitle title="数据列表"/>
                 <Button icon="plus" onClick={this.add}>添加</Button> 
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon="delete" onClick={this.delete}>删除</Button>

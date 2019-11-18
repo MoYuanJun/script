@@ -4,6 +4,7 @@ import { Breadcrumb } from 'antd';
 import { connect } from "react-redux";
 
 import TableContainer from './TableContainer';
+import SearchContainer from './SearchContainer';
 import EditFormContainer from './EditFormContainer';
 import OperationContainer from './OperationContainer';
 
@@ -28,6 +29,7 @@ class ManagementContainer extends React.Component {
 
     // 获取数据: 列表数据
     getData = async (params = {}) => {
+        console.log('查询参数: ', params);
         const { current, pageSize } = { ...this.props.pagination, ...params };
         const res = await asyncManage.api_list({ current, pageSize });
         if (res.code !== 200){return false;}
@@ -54,6 +56,9 @@ class ManagementContainer extends React.Component {
                     </Breadcrumb>
                 </div>
                 <div className="content-body">
+                    <SearchContainer 
+                        getData={this.getData}
+                     />
                     <OperationContainer 
                         getData={this.getData}
                         setSelectedRowKeys={this.setSelectedRowKeys}
