@@ -8,7 +8,13 @@ module.exports = [
   {
     user: 'root',
     ip: '172.20.54.140',
-    name: 'SCMS(54.140)',
+    name: 'SCMS-hebei(54.140)',
+    path: '/opt/sailing/web/apache-tomcat-8.5.32/webapps/ROOT',
+  },
+  {
+    user: 'root',
+    ip: '172.20.54.141',
+    name: 'SCMS-heijing(54.141)',
     path: '/opt/sailing/web/apache-tomcat-8.5.32/webapps/ROOT',
   },
   {
