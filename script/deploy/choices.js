@@ -22,5 +22,11 @@ module.exports = [
     ip: '172.20.52.40',
     name: 'NTA(52.40)',
     path: '/opt/sailing/web/apache-tomcat-8.5.32/webapps/ROOT',
+  },
+  {
+    user: 'root',
+    ip: '172.20.52.234',
+    name: 'DPM3(52.234)',
+    path: '/opt/dpm/publicweb/apache-tomcat/webapps/ROOT',
   }
 ];
