@@ -28,5 +28,12 @@ module.exports = [
     ip: '172.20.52.234',
     name: 'DPM3(52.234)',
     path: '/opt/dpm/publicweb/apache-tomcat/webapps/ROOT',
+  },
+  {
+    user: 'root',
+    port: 40000,
+    ip: '172.20.54.119',
+    name: '集成框架(54.119)',
+    path: '/opt/sgg/web/apache-tomcat-8.5.32/webapps/ROOT',
   }
 ];

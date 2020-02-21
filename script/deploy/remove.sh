@@ -6,8 +6,9 @@ set user [lindex $argv 0]
 set password [lindex $argv 1]
 set ip [lindex $argv 2]
 set path [lindex $argv 3]
+set port [lindex $argv 4]
 
-spawn ssh $user@$ip "rm -rf $path/*"
+spawn ssh -p $port $user@$ip "rm -rf $path/*"
 
 expect {
   "(yes/no)?" { send "yes\r"; exp_continue }
