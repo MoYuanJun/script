@@ -1,22 +1,33 @@
 const boxen = require('boxen');
-const colors = require('colors');
 const choices = require('./choices');
 
 module.exports = [
   {
-    type: "list",
-    message: "选择项目",
-    name: "project",
+    type: 'list',
+    message: '选择项目',
+    name: 'project',
     choices: choices,
   },
   {
-    type: "password",
-    message: "密码",
-    name: "password",
+    type: 'password',
+    message: '密码',
+    name: 'password',
+    validate(v){
+      const done = this.async();
+      if (!v) {
+        done('请输入密码!');
+      } else {
+        done(null, true);
+      }
+    },
+    when({ project }){
+      const { password } = choices.find(v => v.name === project);
+      return !password;
+    }
   },
   {
-    name: "ok",
-    type: "confirm",
+    name: 'ok',
+    type: 'confirm',
     default: false,
     message: ({ project }) => {
       const { user, ip, path, name } = choices.find(v => v.name === project);
