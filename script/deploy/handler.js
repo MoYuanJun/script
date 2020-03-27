@@ -37,8 +37,8 @@ const removeCode = ({ storagePath }) => new Promise(resolve => {
 const putDirectory = ({ storagePath }) => new Promise(resolve => {
   console.log('文件上传中.......'.grey);
   ssh.putDirectory(
-    path.resolve(__dirname, '../../build'), 
-    storagePath, 
+    './build',
+    storagePath,
     { recursive: true }
   ).then(v => {
     console.log('上传 build 成功!'.green);
@@ -51,9 +51,9 @@ const putDirectory = ({ storagePath }) => new Promise(resolve => {
 
 module.exports = async (answers) => {
   const { password: inputPassword, project, ok } = answers;
-  const { 
-    ip, 
-    user, 
+  const {
+    ip,
+    user,
     password,
     port = 22,
     path: storagePath,
