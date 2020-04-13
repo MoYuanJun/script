@@ -32,9 +32,11 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-angular": "^8.0.0",
     "commitizen": "^4.0.3",
+    "compressing": "^1.5.0",
     "cz-conventional-changelog": "^3.0.2",
     "gulp": "^4.0.2",
     "husky": "^3.0.2",
+    "ora": "^4.0.3",
     "standard-version": "^7.0.0"
   },
   "config": {

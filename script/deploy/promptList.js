@@ -12,7 +12,7 @@ module.exports = [
     type: 'password',
     message: '密码',
     name: 'password',
-    validate(v){
+    validate(v) {
       const done = this.async();
       if (!v) {
         done('请输入密码!');
@@ -20,10 +20,16 @@ module.exports = [
         done(null, true);
       }
     },
-    when({ project }){
+    when({ project }) {
       const { password } = choices.find(v => v.name === project);
       return !password;
     }
+  },
+  {
+    name: 'build',
+    type: 'confirm',
+    default: true,
+    message: '是否重新打包项目?'
   },
   {
     name: 'ok',
@@ -41,7 +47,7 @@ module.exports = [
         const label = `${item.label}: `.green;
         const value = `${item.value}`.yellow;
         return `${mes}${br}${label}${value}`;
-      },'');
+      }, '');
       const options = {
         padding: 1,
         borderColor: 'green',
