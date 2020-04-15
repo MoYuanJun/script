@@ -1,8 +1,7 @@
 const shell = require('shelljs');
 
-const company = shell.find('~/Company/ziliao')
-  .filter(file => file.match(/put\.js$/))
-  .map(file => require(file));
+const companyPath = shell.find('~/Company/ziliao/put.js')[0];
+const company = companyPath ?  require(companyPath) : [];
 
 module.exports = [
   ... company,
