@@ -13,6 +13,12 @@ alias gnc="git add . && npm run commit"
 ## 1.2 npm run 快捷命令
 alias nr="npm run"
 
+## 1.3 切换到个人分支
+alias gcmdev="git checkout develop-${USER}-13.9"
+
+## 1.4 合并个人分支到 dev
+alias gmdev="git checkout develop && git pull && git merge develop-${USER}-13.9"
+
 # 自定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
 ## 2.1 git 开启新的版本
@@ -37,20 +43,4 @@ function gnv() {
   else
     echo '未指定版本号! 无法切新分支'
   fi
-}
-
-## 2.2 切换到个人分支
-function gcmdev() {
-  br=`git branch | grep "${USER}"`
-  echo ${br/* /}
-  git checkout ${br/* /}
-}
-
-## 2.2 合并个人分支到 dev
-function gmdev() {
-  git checkout develop
-  git pull
-
-  br=`git branch | grep "develop-${USER}-${1}"`
-  git merge ${br/* /}
 }
