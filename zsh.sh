@@ -13,6 +13,12 @@ alias gnc="git add . && npm run commit"
 ## 1.2 npm run 快捷命令
 alias nr="npm run"
 
+## 1.3 切换到个人开发分支
+alias gcmdev="git checkout $(git branch | grep $USER)"
+
+## 1.4 切换到开发分支
+alias gmdev="git checkout develop && git pull && git merge $(git branch | grep $USER)"
+
 # 自定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
 ## 2.1 git 开启新的版本
