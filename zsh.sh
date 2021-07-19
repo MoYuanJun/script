@@ -14,7 +14,7 @@ alias gnc="git add . && npm run commit"
 alias nr="npm run"
 
 ## 1.3 切换到上一个分支
-alias gcpre=git checkout ${PRE_BR}
+alias gcpre="git checkout ${PRE_BR}"
 
 # 自定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
