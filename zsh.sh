@@ -55,5 +55,5 @@ function gmdev {
   git checkout develop && git pull;
 
   # - 合并分支代码到 develop
-  git merge --no-edit ${currBr}
+  git merge ${currBr}
 }
