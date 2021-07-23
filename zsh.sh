@@ -19,7 +19,7 @@ alias gcpre="git checkout ${PRE_BR}"
 # 自定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
 ## 2.1 git 开启新的版本
-function gnv() {
+function gbn() {
   # 切换 master
   git checkout master;
 
@@ -33,12 +33,12 @@ function gnv() {
   # 删除那些远程已经删除的本地分支记录
   git remote prune origin;
 
-  # 判断是否输入参数(版本号), 如果有的话将自动切一个版本分支出来
+  # 判断是否输入参数(, 如果有的话将自动切一个分支
   if [ "$1" ] ; then
     git checkout -b develop-${USER}-$1 origin/release-$1;
     git branch --unset-upstrea; # 取消上游信息的设置
   else
-    echo '未指定版本号! 无法切新分支'
+    echo '未指定分支后缀! 无法切新分支'
   fi
 }
 
