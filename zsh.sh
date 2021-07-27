@@ -13,8 +13,11 @@ alias gnc="git add . && npm run commit"
 ## 1.2 npm run 快捷命令
 alias nr="npm run"
 
-## 1.3 切换到上一个分支
-alias gcpre="git checkout ${PRE_BR}"
+## 1.3 进入 /Users/linheng/Works/insight_v2
+alias cdi="cd /Users/linheng/Works/insight_v2"
+
+## 1.4 进入 /Users/linheng/Works/insight-manager
+alias cdim="cd /Users/linheng/Works/insight-manager"
 
 # 自定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
@@ -56,4 +59,10 @@ function gmdev {
 
   # - 合并分支代码到 develop
   git merge ${currBr}
+}
+
+## 2.3 切换到上一个分支
+function gcpre {
+  echo "上一个分支: ${PRE_BR}"
+  git checkout ${PRE_BR}
 }
