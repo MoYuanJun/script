@@ -38,7 +38,8 @@ function gbn() {
 
   # 判断是否输入参数(, 如果有的话将自动切一个分支
   if [ "$1" ] ; then
-    git checkout -b develop-${USER}-$1 origin/release-$1;
+    release=`git branch -r | grep "release"`
+    git checkout -b $1 ${release/  /''} # ${release/  /'' 将两个空格替换为 ''
     git branch --unset-upstrea; # 取消上游信息的设置
   else
     echo '未指定分支后缀! 无法切新分支'
