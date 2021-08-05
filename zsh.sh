@@ -8,7 +8,7 @@
 # 别名配置
 
 ## 1.1 添加所有修改、并允许 npm 脚本进行提交
-alias gnc="git add . && npm run commit"
+alias gnc="git add . && npm run commit || npm run cz"
 
 ## 1.2 npm run 快捷命令
 alias nr="npm run"
