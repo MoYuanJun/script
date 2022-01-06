@@ -1,4 +1,7 @@
 # 加载自定义配置, 需要在 source $ZSH/oh-my-zsh.sh 引入自定义配置
+
+npm run link
+
 # source ~/.qy/zsh.sh
 # source $ZSH/oh-my-zsh.sh
 
@@ -67,3 +70,5 @@ function gcpre {
   echo "上一个分支: ${PRE_BR}"
   git checkout ${PRE_BR}
 }
+
+echo 'xxxx'

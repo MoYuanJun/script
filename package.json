@@ -9,13 +9,7 @@
     "cz": "git add . && qy-cz"
   },
   "private": false,
-  "bin": {
-    "hello-cli": "index.js",
-    "ob": "./script/open/index.mjs",
-    "deploy": "./script/deploy/index.js",
-    "xl-create-react-app": "./script/xl/index.js",
-    "template": "./script/template/index.js"
-  },
+  "bin": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qianyin925/script.git"
