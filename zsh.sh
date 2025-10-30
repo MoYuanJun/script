@@ -1,14 +1,13 @@
-# 加载自定义配置, 需要在 source $ZSH/oh-my-zsh.sh 引入自定义配置
+# 加载自定义配置需要在 source $ZSH/oh-my-zsh.sh 引入自定义配置
+# 1. 编辑终端配置文件 .zshrc、.bashrc
+# 2. 在文件中添加 source ~/[项目目录]/zsh.sh.  =>  其实就是将项目目录下的 zsh.sh 文件引入到终端配置文件中
+# 3. 在终端中执行 source ~/.zshrc 或 source ~/.bashrc 使配置生效
 
-npm run link
-
-# source ~/.qy/zsh.sh
-# source $ZSH/oh-my-zsh.sh
-
-# 环境变量配置
+#region 环境变量配置
 # export MANPATH="/usr/local/man:$MANPATH"
+#endregion
 
-# 别名配置
+#region 别名配置
 
 ## 1.1 添加所有修改、并允许 npm 脚本进行提交
 alias gnc="git add . && npm run commit || npm run cz"
@@ -16,59 +15,37 @@ alias gnc="git add . && npm run commit || npm run cz"
 ## 1.2 npm run 快捷命令
 alias nr="npm run"
 
-## 1.3 进入 /Users/linheng/Works/insight_v2
-alias cdi="cd /Users/linheng/Works/insight_v2"
+#endregion
 
-## 1.4 进入 /Users/linheng/Works/insight-manager
-alias cdim="cd /Users/linheng/Works/insight-manager"
+#region 自定义函数 定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
-# 自定义函数: $1 $2 …… 分别接收第一参数、第二参数……
+## 检测当前分支是否有未合并到目标分支的提交
+function gCheck() {
+  # 1. 获取当前分支（推荐用 git 自带命令）
+  currBr=$(git branch --show-current)
 
-## 2.1 git 开启新的版本
-function gbn() {
-  # 切换 master
-  git checkout master;
+  # 2. 没有输入目标分支则抛出错误
+  if [ -z "$1" ]; then
+    echo "\033[31m请输入目标分支\033[0m"
+    return 1
+  fi
 
-  # 更新远程信息
-  git pull;
-  git fetch;
+  # 3. 目标分支
+  targetBr=$1;
 
-  # 清除本地那些没有超前于主分支的分支
-  git branch --no-color --merged | command grep -vE "^(\+|\*|\s*($(git_main_branch)|development|develop|devel|dev)\s*$)" | command xargs -n 1 git branch -d
+  # 4. 拉取远程目标分支(/dev/null 2>&1: 把标准输出(stdout) 和 标准错误(stderr) 都重定向到“黑洞”（即不显示任何输出）)
+  git fetch origin $targetBr >/dev/null 2>&1
 
-  # 删除那些远程已经删除的本地分支记录
-  git remote prune origin;
+  # 5. 打印当前分支和目标分支
+  echo "当前分支: $currBr"
+  echo "目标分支: $targetBr"
+  echo "\n"
 
-  # 判断是否输入参数(, 如果有的话将自动切一个分支
-  if [ "$1" ] ; then
-    release=`git branch -r | grep "release"`
-    git checkout -b $1 ${release/  /''} # ${release/  /'' 将两个空格替换为 ''
-    git branch --unset-upstrea; # 取消上游信息的设置
+  # 6. 检测当前分支是否有未合并到目标分支的提交
+  if git cherry origin/$targetBr $currBr | grep -q '^+'; then
+    echo "\033[31m🚧 $currBr 有未合并到 $targetBr 的提交\033[0m"
   else
-    echo '未指定分支后缀! 无法切新分支'
+    echo "\033[32m✅ $currBr 已完全合并到 $targetBr\033[0m"
   fi
 }
-
-## 2.2 合并分支到 dev
-function gmdev {
-  # - 获取当前分支名
-  brWithStar=`git branch | grep "*"`;
-  currBr=${brWithStar/* /};
-
-  # - 暴露出环境变量, 方便快速回退到分支
-  export PRE_BR=${currBr}
-
-  # - 切换到 develop 并拉取最新代码
-  git checkout develop && git pull;
-
-  # - 合并分支代码到 develop
-  git merge ${currBr}
-}
-
-## 2.3 切换到上一个分支
-function gcpre {
-  echo "上一个分支: ${PRE_BR}"
-  git checkout ${PRE_BR}
-}
-
-echo 'xxxx'
+#endregion
