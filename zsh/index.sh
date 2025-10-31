@@ -1,26 +1,11 @@
-# 加载自定义配置需要在 source $ZSH/oh-my-zsh.sh 引入自定义配置
-# 1. 编辑终端配置文件 .zshrc、.bashrc
-# 2. 在文件中添加 source ~/[项目目录]/zsh.sh.  =>  其实就是将项目目录下的 zsh.sh 文件引入到终端配置文件中
-# 3. 在终端中执行 source ~/.zshrc 或 source ~/.bashrc 使配置生效
+__SCRIPT_DIR="${0:A:h}" # 获取脚本所在目录
 
-#region 环境变量配置
-# export MANPATH="/usr/local/man:$MANPATH"
-#endregion
-
-#region 别名配置
-
-## 1.1 添加所有修改、并允许 npm 脚本进行提交
-alias gnc="git add . && npm run commit || npm run cz"
-
-## 1.2 npm run 快捷命令
-alias nr="npm run"
-
-#endregion
+source "${__SCRIPT_DIR}/base.sh" # 加载基础配置
 
 #region 自定义函数 定义函数: $1 $2 …… 分别接收第一参数、第二参数……
 
-## 检测当前分支是否有未合并到目标分支的提交
-function gCheck() {
+## 检测当前分支是否有未合并到目标分支的提交, git check 的缩写
+function mgc() {
   # 1. 获取当前分支（推荐用 git 自带命令）
   currBr=$(git branch --show-current)
 
