@@ -33,4 +33,24 @@ function mgc() {
     echo "\033[32m✅ $currBr 已完全合并到 $targetBr\033[0m"
   fi
 }
+
+# 清除本地已合并到「版本分支」的分支
+function mgc() {
+  # 1. 没有输入「版本分支」支则抛出错误
+  if [ -z "$1" ]; then
+    echo "\033[31m请输入「版本分支」\033[0m"
+    return 1
+  fi
+
+  # 2. 版本分支
+  versionBranch=$1;
+
+  # 3. 打印当前分支和目标分支
+  echo "清除本地已合并到「版本分支: $versionBranch」的分支"
+  echo "\n"
+
+  # 4. 清除本地那些没有超前于主分支的分支
+  git branch --no-color --merged | command grep -vE "^(\+|\*|\s*($(git_main_branch)|dev|develop|$versionBranch)\s*$)" | command xargs -n 1 git branch -d
+  echo "\n"
+}
 #endregion
