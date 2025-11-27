@@ -35,7 +35,7 @@ function mgc() {
 }
 
 # 清除本地已合并到「版本分支」的分支
-function mgc() {
+function mgd() {
   # 1. 没有输入「版本分支」支则抛出错误
   if [ -z "$1" ]; then
     echo "\033[31m请输入「版本分支」\033[0m"
