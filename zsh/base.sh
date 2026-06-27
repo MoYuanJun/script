@@ -13,3 +13,6 @@ mglo() {
     -n "${1:-20}"
 }
 #endregion
+
+# 今日 coding 页面
+alias mcoding="cd /Volumes/家庭硬盘/macmini/coding"
